@@ -1,0 +1,50 @@
+# Loantrova
+
+A loan finder that shows which Central Government, Tamil Nadu Government and bank loans you may qualify for.
+
+**Live demo:** https://loantrova.netlify.app
+
+## Problem
+Many students, backward class families and workers don’t know about government loan schemes and end up taking costlier loans.
+
+**Domain:** FinTech · Financial Inclusion | **Category:** Software
+
+## Features
+- Rule-based eligibility check (age, gender, community, occupation, income, credit score)
+- 66 loan entries: 30 Central, 11 Tamil Nadu, 25 bank
+- English and Tamil
+- Eligibility, benefits, documents and official website for each loan
+- EMI calculator
+- Document checklist to print or share
+- Sample profiles for a quick demo
+- Light and dark mode
+- No sign-up, name or phone number needed
+
+## How it works
+1. **Profile:** enter your details
+2. **Check:** eligibility rules run in your browser
+3. **Results:** see matching loans
+4. **Action:** view the document checklist
+
+## Tech stack
+HTML, CSS and JavaScript in a single file. No framework, backend or build step. Hosted on Netlify.
+
+## Run locally
+Download this repository and open `index.html` in a browser.
+
+## Project structure
+```
+index.html    the whole app
+docs/         presentation
+README.md
+LICENSE
+.gitignore
+```
+
+## Limitations
+- Scheme details need a review every 3 months.
+- Some details, including some credit limits, are not yet verified.
+- Results are guidance only, not loan approval. Confirm on the official website or with the bank.
+
+## Team
+**Conquers X**

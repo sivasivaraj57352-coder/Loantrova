@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loan Finder · கடன் வழிகாட்டி</title>
+<style>
+:root{--bg:#f2f8fc;--sf:#fff;--tx:#12303f;--mu:#5b7280;--ac:#0b7bb5;--on:#fff;--ac2:#dff0fa;--bd:#d3e3ee;--c1:#0b7bb5;--c2:#12805c;--c3:#b26a00;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1920;--sf:#152630;--tx:#e6f1f7;--mu:#93aab6;--ac:#4cb6ea;--on:#06202d;--ac2:#1a3441;--bd:#27414f;--c1:#4cb6ea;--c2:#4fd1a0;--c3:#f0b44c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1920;--sf:#152630;--tx:#e6f1f7;--mu:#93aab6;--ac:#4cb6ea;--on:#06202d;--ac2:#1a3441;--bd:#27414f;--c1:#4cb6ea;--c2:#4fd1a0;--c3:#f0b44c;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.45 system-ui,-apple-system,"Segoe UI","Noto Sans Tamil",sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;align-items:center;gap:8px}
+h1{font-size:1.35rem;margin:0}h1 small{display:block;font-size:.8rem;font-weight:400;color:var(--mu)}
+h2{font-size:1.05rem;margin:18px 0 8px}
+button{font:inherit;cursor:pointer}
+.lang{border:1px solid var(--ac);background:none;color:var(--ac);border-radius:20px;padding:6px 14px}
+.steps{display:flex;gap:6px;margin:14px 0}.steps i{flex:1;height:5px;border-radius:3px;background:var(--bd)}.steps i.on{background:var(--ac)}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--bd);background:var(--sf);color:var(--tx);border-radius:20px;padding:8px 14px}
+.chip.on{background:var(--ac);color:var(--on);border-color:var(--ac)}
+input{font:inherit;width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--sf);color:var(--tx)}
+.btn{width:100%;margin-top:6px;padding:13px;border:0;border-radius:12px;background:var(--ac);color:var(--on);font-weight:600}
+.btn.alt{background:none;color:var(--ac);border:1px solid var(--ac)}
+.err{color:#c0392b;font-size:.9rem;margin:6px 0}
+.tabs{display:flex;gap:6px;overflow-x:auto;margin-bottom:10px}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;border-radius:6px;padding:2px 8px;color:var(--on)}
+.L-C{background:var(--c1)}.L-S{background:var(--c2)}.L-B{background:var(--c3)}
+details summary{cursor:pointer;color:var(--ac);margin-top:8px}
+ul{margin:6px 0 0;padding-left:20px}
+.cr{color:var(--mu);font-size:.88rem;margin:4px 0}
+a.go{display:inline-block;margin-top:8px;color:var(--ac);font-weight:600}
+.note{font-size:.8rem;color:var(--mu);margin-top:14px}.sc{color:var(--tx);font-size:.9rem;font-weight:400;margin-top:3px}
+.er{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid rgba(128,128,128,.25);font-size:.92rem}.er b{text-align:right}.more{margin-top:8px}.hb{display:flex;gap:6px}.row{display:flex;gap:8px;align-items:center}.row input{flex:1}
+.warn{color:var(--c3)}label{display:block;margin-top:8px}.big{font-size:2rem;font-weight:700;color:var(--ac);margin:8px 0 2px}
+.res{background:var(--ac2);border-radius:12px;padding:12px;margin-top:12px}
+.btn.sm{width:auto;padding:9px 14px;margin-top:10px}
+#pv{display:none}
+@media print{body{background:#fff!important;color:#000!important}#app{display:none}#pv{display:block;padding:8px}#pv h1{font-size:1.3rem}#pv h2{font-size:1.05rem}#pv h3{margin:14px 0 4px;font-size:1rem;break-after:avoid}.ck{list-style:none;padding-left:0}.ck li{margin:4px 0}.ck+p{font-size:.85rem;margin:2px 0 10px}}
+
+.card{padding:12px;margin-bottom:8px}
+.card h2{font-size:.95rem;margin:10px 0 4px}
+.chip{flex:none}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:8px 0;margin:0 0 6px;flex-wrap:nowrap}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:6}
+.nm{display:flex;gap:6px;align-items:center;margin-bottom:2px}
+.lc{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:2px 0 0}
+.pair{display:flex;gap:8px}.pair .btn{margin-top:6px}.pair .btn.sm{flex:1}
+#tp{display:none;position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:7;width:44px;height:44px;border-radius:50%;border:0;background:var(--ac);color:var(--on);font-size:1.3rem}
+@media print{#tp{display:none!important}}
+</style></head><body><main id="app"></main><div id="pv"></div><button id="tp" aria-label="Back to top">↑</button>
+<script>
+const D={ID:["Aadhaar & PAN card","ஆதார் & பான் அட்டை"],AD:["Address proof","முகவரிச் சான்று"],IN:["Income certificate","வருமானச் சான்றிதழ்"],CS:["Community certificate","சாதிச் சான்றிதழ்"],PH:["Passport photos","பாஸ்போர்ட் புகைப்படம்"],BS:["6-month bank statement","6 மாத வங்கி அறிக்கை"],BP:["Project report","திட்ட அறிக்கை"],UD:["Udyam registration","உத்யம் பதிவு"],LD:["Land records (patta/chitta)","நிலப் பதிவுகள் (பட்டா/சிட்டா)"],AM:["Admission letter","சேர்க்கைக் கடிதம்"],MK:["Mark sheets","மதிப்பெண் சான்றிதழ்"],CO:["Co-applicant details","இணை விண்ணப்பதாரர் விவரம்"],QT:["Asset quotation","சொத்து விலைப்புள்ளி"],GS:["Gold/jewellery details","தங்க நகை விவரம்"],SH:["SHG membership proof","சுயஉதவிக் குழு சான்று"],VC:["Vendor certificate","வியாபாரி சான்றிதழ்"],AC:["Artisan ID card","கைவினைஞர் அடையாள அட்டை"],SL:["Salary slips","சம்பளச் சீட்டு"],PR:["Property papers","சொத்து ஆவணங்கள்"],EB:["Latest electricity bill","சமீபத்திய மின் கட்டண ரசீது"],NA:["Nativity certificate","நாட்டுரிமைச் சான்றிதழ்"],FC:["Smart family card","குடும்ப அட்டை"]};
+const CAT={biz:["Business & MSME","தொழில் & MSME"],agr:["Agriculture & Fisheries","விவசாயம் & மீன்வளம்"],edu:["Education","கல்வி"],hou:["Housing","வீடு"],wom:["Women & SHG","பெண்கள் & சுய உதவிக் குழு"],com:["Community-based","சமூகம் சார்ந்த"],per:["Personal & Gold","தனிநபர் & தங்கம்"],skl:["Artisans & Skills","கைவினைஞர் & திறன்"]};
+const OCC={F:["Farmer / Fisher","விவசாயி / மீனவர்"],S:["Student","மாணவர்"],B:["Business / Self-employed","தொழில் / சுயதொழில்"],J:["Salaried","சம்பளதாரர்"],A:["Artisan / Weaver","கைவினைஞர் / நெசவாளர்"],V:["Street vendor","தெருவோர வியாபாரி"],H:["Homemaker / Unemployed","இல்லத்தரசி / வேலையற்றவர்"]};
+const COM={G:["General","பொது"],BC:["BC","பிற்படுத்தப்பட்டோர்"],MBC:["MBC","மிகவும் பிற்படுத்தப்பட்டோர்"],SC:["SC","ஆதிதிராவிடர்"],ST:["ST","பழங்குடியினர்"],M:["Minority","சிறுபான்மையினர்"]};
+const GEN={F:["Female","பெண்"],M:["Male","ஆண்"],O:["Other","பிற"]};
+const LV={C:["Central","மத்திய அரசு"],S:["Tamil Nadu","தமிழ்நாடு"],B:["Bank","வங்கி"]};
+const TX={
+en:{ben:"Benefits you can claim",benNote:"Amounts and rates can change. Confirm on the official site.",sub:"Find the Central, Tamil Nadu and bank loans you may qualify for",s1:"Your details",s2:"Loan types",s3:"Results",age:"Age",inc:"Annual family income (₹ lakh)",gen:"Gender",com:"Community",occ:"Occupation",next:"Next",back:"Back",find:"Find loans",all:"All",pick:"Tap the loan types you need. You can pick more than one.",e1:"Please fill in every field",e2:"Select at least one loan type",none:"No matching loans. Try more loan types or check your details.",docs:"Documents needed",apply:"Official website",found:"loans found",priv:"Private: runs in your browser. Nothing is stored or sent anywhere.",disc:"Guidance only. The bank or department decides the final sanction. Rules and limits change, so confirm on the official site before applying.",redo:"Start over",sch:"Scheme",nat:"National scheme",sta:"State scheme",own:"Bank’s own product",tap:"Tap for eligibility and documents",elig:"Eligibility & official limits",age2:"Age",inc2:"Income up to ₹",lakh:" lakh",cnt:"loans",ds:"Data reviewed every 3 months",sam:"Try a sample profile",emi:"EMI calculator",loanAmt:"Loan amount (₹)",rate:"Interest rate (% per year)",ten:"Tenure",yrs:"Years",mos:"Months",mEmi:"Estimated monthly EMI",tInt:"Total interest",tPay:"Total payable",emiNote:"Estimate only. Your bank’s rate, fees and rounding may differ.",err3:"Enter a loan amount, a rate (0 or more) and a tenure above 0.",pdf:"Save checklist as PDF",pdfAll:"Save checklist for all loans (PDF)",chkT:"Document checklist",allDocs:"Documents needed for all matched loans",ver:"Last verified",nxt:"Next review",by:"Verified by",stale:"Not verified for over 6 months. Please confirm on the official site.",pend:"Not yet verified against the official source. Please confirm before applying.",date:"Printed on",src:"Official site",eCat:"Category",eInc:"Annual income limit",eAge:"Age",eOcc:"Occupation",eGen:"Gender",eAny:"Any",eNo:"No limit",eW:"Women only",eOr:" or ",eWm:"women",eSp:"special categories",more:"More details (limits, rates, notes)",crMin:"{n}+ (lender minimum)",eCr:"Credit score",eInD:"Income details",iNo:"No income limit set by the scheme",stt:"State",crt:"Credit score (CIBIL)",crW:"Needs a credit score of {n}+. Check yours first; a low score can mean rejection.",bunv:"Benefit figures not yet verified against the official source. Confirm before applying.",bver:"Benefits verified",benEn:"",showMore:"Show {n} more",cp:"Share / copy checklist",copied:"Copied ✓",allT:"Top"},
+ta:{ben:"நீங்கள் பெறக்கூடிய பலன்கள்",benNote:"தொகை, வட்டி மாறக்கூடும். அதிகாரப்பூர்வ தளத்தில் உறுதிசெய்யவும்.",sub:"உங்களுக்குத் தகுதியான மத்திய, தமிழ்நாடு மற்றும் வங்கிக் கடன்களைக் கண்டறியுங்கள்",s1:"உங்கள் விவரங்கள்",s2:"கடன் வகைகள்",s3:"முடிவுகள்",age:"வயது",inc:"ஆண்டு குடும்ப வருமானம் (₹ லட்சம்)",gen:"பாலினம்",com:"சமூகம்",occ:"தொழில்",next:"அடுத்து",back:"பின்",find:"கடன்களைக் காண்க",all:"அனைத்தும்",pick:"உங்களுக்குத் தேவையான கடன் வகைகளைத் தட்டவும். ஒன்றுக்கு மேற்பட்டவற்றையும் தேர்ந்தெடுக்கலாம்.",e1:"அனைத்து விவரங்களையும் நிரப்பவும்",e2:"குறைந்தது ஒரு கடன் வகையைத் தேர்ந்தெடுக்கவும்",none:"பொருந்தும் கடன்கள் இல்லை. மேலும் வகைகளைத் தேர்ந்தெடுக்கவும் அல்லது விவரங்களைச் சரிபார்க்கவும்.",docs:"தேவையான ஆவணங்கள்",apply:"அதிகாரப்பூர்வ இணையதளம்",found:"கடன்கள் கிடைத்தன",priv:"தனியுரிமை: உங்கள் உலாவியிலேயே இயங்குகிறது. எதுவும் சேமிக்கப்படாது, அனுப்பப்படாது.",disc:"வழிகாட்டுதல் மட்டுமே. இறுதி ஒப்புதலை வங்கி அல்லது துறை முடிவு செய்யும். விதிகள் மாறக்கூடும், விண்ணப்பிக்கும் முன் அதிகாரப்பூர்வ தளத்தில் உறுதிசெய்யவும்.",redo:"மீண்டும் தொடங்கு",sch:"திட்டம்",nat:"தேசியத் திட்டம்",sta:"மாநிலத் திட்டம்",own:"வங்கியின் சொந்தத் தயாரிப்பு",tap:"தகுதி மற்றும் ஆவணங்களுக்குத் தட்டவும்",elig:"தகுதி மற்றும் அதிகாரப்பூர்வ வரம்புகள்",age2:"வயது",inc2:"வருமானம் ₹",lakh:" லட்சம் வரை",cnt:"கடன்கள்",ds:"தரவு 3 மாதங்களுக்கு ஒருமுறை மறுஆய்வு செய்யப்படுகிறது",sam:"மாதிரி விவரத்தை முயற்சிக்கவும்",emi:"EMI கணக்கீடு",loanAmt:"கடன் தொகை (₹)",rate:"வட்டி விகிதம் (ஆண்டுக்கு %)",ten:"காலம்",yrs:"ஆண்டுகள்",mos:"மாதங்கள்",mEmi:"மாதாந்திர EMI (மதிப்பீடு)",tInt:"மொத்த வட்டி",tPay:"மொத்தமாகச் செலுத்த வேண்டியது",emiNote:"மதிப்பீடு மட்டுமே. உங்கள் வங்கியின் வட்டி, கட்டணங்கள் மாறுபடலாம்.",err3:"கடன் தொகை, வட்டி (0 அல்லது அதற்கு மேல்), காலம் (0-க்கு மேல்) ஆகியவற்றை உள்ளிடவும்.",pdf:"சரிபார்ப்புப் பட்டியலை PDF ஆகச் சேமி",pdfAll:"அனைத்து கடன்களுக்கான பட்டியலை PDF ஆகச் சேமி",chkT:"ஆவணச் சரிபார்ப்புப் பட்டியல்",allDocs:"பொருந்திய அனைத்து கடன்களுக்கும் தேவையான ஆவணங்கள்",ver:"கடைசியாகச் சரிபார்த்தது",nxt:"அடுத்த மறுஆய்வு",by:"சரிபார்த்தவர்",stale:"6 மாதங்களுக்கு மேல் சரிபார்க்கப்படவில்லை. அதிகாரப்பூர்வ தளத்தில் உறுதிசெய்யவும்.",pend:"அதிகாரப்பூர்வ மூலத்துடன் இன்னும் சரிபார்க்கப்படவில்லை. விண்ணப்பிக்கும் முன் உறுதிசெய்யவும்.",date:"அச்சிட்ட தேதி",src:"அதிகாரப்பூர்வ தளம்",eCat:"சமூகம்",eInc:"ஆண்டு வருமான வரம்பு",eAge:"வயது",eOcc:"தொழில்",eGen:"பாலினம்",eAny:"அனைவரும்",eNo:"வரம்பு இல்லை",eW:"பெண்கள் மட்டும்",eOr:" அல்லது ",eWm:"பெண்கள்",eSp:"சிறப்புப் பிரிவினர்",more:"கூடுதல் விவரங்கள் (வரம்பு, வட்டி, குறிப்புகள்)",crMin:"{n}+ (கடன் வழங்குநரின் குறைந்தபட்சம்)",eCr:"கிரெடிட் ஸ்கோர்",eInD:"வருமான விவரம்",iNo:"திட்டத்தில் வருமான வரம்பு இல்லை",stt:"மாநிலம்",crt:"கிரெடிட் ஸ்கோர் (CIBIL)",crW:"கிரெடிட் ஸ்கோர் {n}+ தேவை. முதலில் உங்கள் ஸ்கோரைச் சரிபார்க்கவும்; குறைவாக இருந்தால் நிராகரிக்கப்படலாம்.",bunv:"பலன் தொகைகள் அதிகாரப்பூர்வ மூலத்துடன் இன்னும் சரிபார்க்கப்படவில்லை. விண்ணப்பிக்கும் முன் உறுதிசெய்யவும்.",bver:"பலன்கள் சரிபார்த்தது",benEn:"பலன் விவரங்கள் தற்போது ஆங்கிலத்தில் மட்டும் உள்ளன.",showMore:"மேலும் {n} காண்க",cp:"பட்டியலைப் பகிர் / நகலெடு",copied:"நகலெடுக்கப்பட்டது ✓",allT:"மேலே"}};
+// name|level|category|rules (o occupation, c community, w women also eligible, g gender, i max income lakh, a age)|docs|site
+const R=`PM Mudra Yojana (Shishu/Kishor/Tarun)|C|biz|o:B,A,V,H|ID,AD,PH,BP,BS|mudra.org.in
+PMEGP Subsidised Business Loan|C|biz|o:B,H,A;a:18-|ID,AD,CS,PH,BP,QT|kviconline.gov.in/pmegpeportal
+Stand-Up India|C|biz|c:SC,ST;w:1;a:18-|ID,AD,CS,BP,UD|standupmitra.in
+PM FME Micro Food Processing Loan|C|biz|o:B,H;a:18-|ID,AD,BP,QT,BS|pmfme.mofpi.gov.in|pending
+PM SVANidhi|C|biz|o:V;a:18-|ID,VC,PH|pmsvanidhi.mohua.gov.in
+PM Vishwakarma|C|skl|o:A;a:18-|ID,AC,PH,BS|pmvishwakarma.gov.in
+CGTMSE Collateral-free Credit Guarantee|C|biz|o:B|ID,UD,BP,BS|cgtmse.in
+Udyami Mitra MSME Loans|C|biz|o:B|ID,UD,BP,BS|udyamimitra.in
+PM-Vidyalaxmi Education Loan|C|edu|o:S|ID,AM,MK,CO,IN|pmvidyalaxmi.co.in
+Central Sector Interest Subsidy (Education)|C|edu|o:S;i:4.5|ID,AM,IN,MK|pmvidyalaxmi.co.in
+NBCFDC Education Loan|C|edu|o:S;c:BC,MBC;i:3|ID,CS,IN,AM,MK,CO|nbcfdc.gov.in|2026-11-24
+NSFDC Education Loan|C|edu|o:S;c:SC;i:5|ID,CS,IN,AM,MK,CO|nsfdc.nic.in|2026-11-16
+NMDFC Education Loan|C|edu|o:S;c:M;i:8|ID,CS,IN,AM,MK,CO|nmdfc.org
+Kisan Credit Card|C|agr|o:F|ID,LD,AD,PH|myscheme.gov.in
+Agriculture Infrastructure Fund|C|agr|o:F,B|ID,LD,BP,QT|myscheme.gov.in
+PM Matsya Sampada Yojana (Fisheries)|C|agr|o:F,B|ID,AD,BP,QT|pmmsy.dof.gov.in
+Dairy and Livestock Infrastructure Loans (AHIDF)|C|agr|o:F,B|ID,LD,BP,QT|dahd.nic.in
+PMAY-Urban Interest Subsidy|C|hou|i:9;a:18-|ID,AD,IN,PR|pmay-urban.gov.in
+PMAY-Gramin|C|hou|i:1.8|ID,AD,IN,LD|pmayg.nic.in|2026-11-24
+PM Surya Ghar Rooftop Solar Loan|C|hou|a:18-|ID,AD,EB,PR,QT|pmsuryaghar.gov.in|pending
+NSFDC Loans|C|com|c:SC;i:5|ID,CS,IN,BP|nsfdc.nic.in|2026-11-16
+NSTFDC Loans|C|com|c:ST;i:3|ID,CS,IN,BP|nstfdc.tribal.gov.in
+NBCFDC Loans|C|com|c:BC,MBC;i:3|ID,CS,IN,BP|nbcfdc.gov.in|2026-11-24
+NMDFC Loans|C|com|c:M;i:8|ID,CS,IN,BP|nmdfc.org
+Virasat Loan for Minority Artisans (NMDFC/TAMCO)|C|skl|o:A;c:M;i:8|ID,CS,AC,IN,BP|nmdfc.org
+DAY-NRLM SHG Bank Linkage|C|wom|g:F|ID,SH,AD,BS|nrlm.gov.in
+PM Jan Dhan Overdraft|C|per|a:18-65|ID,AD,BS|pmjdy.gov.in
+PM-KUSUM Solar Pump Loan|C|agr|o:F|ID,LD,QT|pmkusum.mnre.gov.in
+Pashu Kisan Credit Card (Livestock)|C|agr|o:F|ID,LD,AD,PH|myscheme.gov.in
+SIDBI Mahila Udyam Nidhi|C|wom|g:F;o:B,H|ID,AD,BP,UD|sidbi.in
+TAHDCO Loans|S|com|c:SC,ST;i:3;ix:SC=5|ID,CS,IN,BP|tahdco.com|2026-11-24
+TABCEDCO Individual Loan|S|com|c:BC,MBC;i:3;a:18-60|ID,CS,IN,NA,FC,PH,BP,QT|tabcedco.tn.gov.in|2026-11-24
+TABCEDCO Milch Animal Loan (Aavin)|S|agr|c:BC,MBC;i:3;a:18-60|ID,CS,IN,NA,FC,PH|tabcedco.tn.gov.in|2026-11-24
+TAMCO Loans|S|com|c:M;i:8|ID,CS,IN,BP|tamco.tn.gov.in
+Annal Ambedkar Business Champions Scheme (AABCS)|S|biz|c:SC,ST;o:B,H;a:18-|ID,AD,CS,PH,BP,QT|msmeonline.tn.gov.in|2026-11-24
+NEEDS Entrepreneur Scheme|S|biz|o:B,H;a:21-45;s:55|ID,AD,MK,BP|msmeonline.tn.gov.in
+UYEGP Youth Employment Scheme|S|biz|o:B,H;a:18-45;s:55;i:5|ID,AD,CS,BP|msmeonline.tn.gov.in|2026-11-16
+TN Co-operative Crop Loan|S|agr|o:F|ID,LD,AD|tn.gov.in
+TN Co-operative Jewel Loan|S|per|a:18-|ID,AD,GS|tn.gov.in
+Mathi SHG Loan (TNSRLM)|S|wom|g:F|ID,SH,BS|tnrd.tn.gov.in
+TIIC Industrial Loan|S|biz|o:B|ID,UD,BP,QT|tiic.org
+SBI Student Loan|B|edu|o:S|ID,AM,MK,CO,IN|sbi.co.in
+Canara Vidya Turant|B|edu|o:S|ID,AM,MK,CO,IN|canarabank.com
+Indian Bank Education Loan|B|edu|o:S|ID,AM,MK,CO,IN|indianbank.in
+Union Bank Education Loan|B|edu|o:S|ID,AM,MK,CO,IN|unionbankofindia.co.in
+SBI Agri Gold Loan|B|agr|o:F|ID,LD,GS,PH|sbi.co.in
+Indian Bank Agri Term Loan|B|agr|o:F|ID,LD,QT|indianbank.in
+TN Grama Bank Crop Loan|B|agr|o:F|ID,LD,AD|tngb.bank.in
+IOB Kisan Credit Card|B|agr|o:F|ID,LD,PH|iob.in
+SBI MSME Loan|B|biz|o:B|ID,UD,BP,BS|sbi.co.in
+Indian Bank MSME Loan|B|biz|o:B|ID,UD,BP,BS|indianbank.in
+Canara Bank MSME Loan|B|biz|o:B|ID,UD,BP,BS|canarabank.com
+Bank of Baroda MSME Loan|B|biz|o:B|ID,UD,BP,BS|bankofbaroda.in
+KVB Business Loan|B|biz|o:B|ID,UD,BP,BS|kvb.co.in
+SBI Home Loan|B|hou|o:J,B;a:21-65|ID,AD,SL,PR,BS|sbi.co.in
+Canara Home Loan|B|hou|o:J,B;a:21-65|ID,AD,SL,PR,BS|canarabank.com
+Indian Bank Home Loan|B|hou|o:J,B;a:21-65|ID,AD,SL,PR,BS|indianbank.in
+IOB Home Loan|B|hou|o:J,B;a:21-65|ID,AD,SL,PR,BS|iob.in
+SBI Stree Shakti|B|wom|g:F;o:B|ID,UD,BP,BS|sbi.co.in
+Bank of Baroda Mahila Shakti|B|wom|g:F;o:B,H|ID,AD,BP,BS|bankofbaroda.in
+SBI Xpress Credit Personal Loan|B|per|o:J;a:21-58;cs:650|ID,AD,SL,BS|sbi.co.in
+Canara Personal Loan|B|per|o:J;a:21-60|ID,AD,SL,BS|canarabank.com
+SBI Gold Loan|B|per|a:18-|ID,AD,GS|sbi.co.in
+SBI Pension Loan|B|per|a:58-|ID,AD,BS|sbi.co.in
+Canara Artisan Credit Card|B|skl|o:A|ID,AC,PH,BS|canarabank.com
+Indian Bank Artisan Credit Card|B|skl|o:A|ID,AC,PH,BS|indianbank.in`.split("\n").map((l,i)=>{const [n,lv,c,ru,d,s,vv]=l.split("|"),r={};ru.split(";").forEach(x=>{const [k,v]=x.split(":");r[k]=v});return{i,n,lv,c,r,d:d.split(","),s,v:vv||"2026-11"}});
+const SCH=[[["SBI Student Loan","Canara Vidya Turant","Indian Bank Education Loan","Union Bank Education Loan"],"IBA Model Education Loan Scheme (CSIS interest subsidy if eligible)","nat"],[["SBI Agri Gold Loan","TN Grama Bank Crop Loan","IOB Kisan Credit Card"],"Kisan Credit Card Scheme","nat"],[["Indian Bank Agri Term Loan"],"NABARD-refinanced Agri Term Loan Scheme","nat"],[["SBI MSME Loan","Indian Bank MSME Loan","Canara Bank MSME Loan","Bank of Baroda MSME Loan","KVB Business Loan"],"MSME lending with CGTMSE guarantee cover","nat"],[["SBI Home Loan","Canara Home Loan","Indian Bank Home Loan","IOB Home Loan"],"PMAY-Urban Interest Subsidy (if eligible)","nat"],[["SBI Stree Shakti"],"SBI Stree Shakti Package","own"],[["Bank of Baroda Mahila Shakti"],"Bank of Baroda Mahila Shakti","own"],[["SBI Xpress Credit Personal Loan","Canara Personal Loan","SBI Gold Loan","SBI Pension Loan"],"Bank’s own product (no government scheme)","own"],[["Canara Artisan Credit Card","Indian Bank Artisan Credit Card"],"Artisan Credit Card Scheme","nat"]];
+const NT={"NMDFC Education Loan":"Minority students in professional or technical courses. Up to ₹20 lakh in India and ₹30 lakh abroad at about 3% (family income up to ₹3 lakh) or 5% (₹3–8 lakh). This is the route now that the Padho Pardesh interest subsidy has been discontinued.","Virasat Loan for Minority Artisans (NMDFC/TAMCO)":"Minority artisans and traditional craftsmen, family income up to ₹8 lakh. Loans up to about ₹10 lakh at concessional rates. Confirm limits and rates with NMDFC or TAMCO.","TABCEDCO Milch Animal Loan (Aavin)":"BC/MBC/denotified community members buying milch animals through Aavin milk societies. Same eligibility as TABCEDCO (age 18–60, income up to ₹3 lakh). Limits are listed on the TABCEDCO site.","PM Surya Ghar Rooftop Solar Loan":"Households installing rooftop solar. Central subsidy plus a low-interest bank loan for the remaining cost. Apply on the national portal; confirm the current subsidy and loan terms before applying.","PM FME Micro Food Processing Loan":"Micro food-processing units (existing or new). Credit-linked capital subsidy of 35% of project cost, with a cap per unit, plus a bank loan. Confirm current limits on the PM FME portal.","PM Mudra Yojana (Shishu/Kishor/Tarun)":"Collateral-free loans for non-farm income activities: Shishu up to ₹50,000, Kishor up to ₹5 lakh, Tarun up to ₹10 lakh, Tarun Plus up to ₹20 lakh.","PMEGP Subsidised Business Loan":"New units only. Project cost up to ₹50 lakh (manufacturing) or ₹20 lakh (service). Subsidy 15–35%; own share 10% (5% for special categories). Age 18+, no income limit; 8th pass needed above ₹10 lakh (manufacturing) or ₹5 lakh (service).","Stand-Up India":"SC/ST and/or women, age 18+, new (greenfield) enterprise. Bank loan ₹10 lakh to ₹1 crore. It was extended only to FY2025 and a revamped version was announced in 2026, so confirm it is open.","PM SVANidhi":"Street vendors, age 18+, no upper age. Collateral-free ₹15,000 (12 months), then ₹25,000, then ₹50,000 after timely repayment. 7% interest subsidy. Needs vending certificate, ID card or local verification.","PM Vishwakarma":"Artisans in the notified traditional trades, age 18+. Skill training, toolkit support, then collateral-free ₹1 lakh and ₹2 lakh loans at 5% interest. Confirm trade list on the portal.","CGTMSE Collateral-free Credit Guarantee":"Guarantee cover that lets banks lend to micro and small enterprises without collateral. Covered amount and fee are set by CGTMSE, so ask the bank for the current ceiling.","Udyami Mitra MSME Loans":"SIDBI portal to apply for MSME loans through banks. Loan size, rate and eligibility depend on the lender and scheme chosen.","PM-Vidyalaxmi Education Loan":"Students admitted to listed top institutions (QHEIs). Collateral and guarantor free up to ₹10 lakh; 75% government guarantee on loans up to ₹7.5 lakh. The central government pays the full interest during the moratorium (course period plus one year) for family income up to ₹4.5 lakh. 3% interest subvention for family income up to ₹8 lakh. No income limit for the loan itself.","Central Sector Interest Subsidy (Education)":"Full interest subsidy during course plus one year for family income up to ₹4.5 lakh, for technical or professional courses at approved institutions. Loan up to ₹10 lakh.","NBCFDC Education Loan":"BC/MBC students, family income up to ₹3 lakh (NBCFDC site). Up to ₹25 lakh at 8% for the student; repayment up to 10 years including a 5-year moratorium. Applied through the state channelising agency (TABCEDCO in Tamil Nadu).","NSFDC Education Loan":"SC students, family income up to ₹5 lakh (from 7 Jan 2026). Up to ₹40 lakh or 90% of the course fee at about 6.5%. Applied through the state channelising agency (TAHDCO in Tamil Nadu).","Kisan Credit Card":"Owner farmers, tenants, sharecroppers and SHG/JLG members. Interest subvention on crop loans up to ₹5 lakh (7%, effectively 4% on prompt repayment). Collateral-free up to ₹2 lakh.","Agriculture Infrastructure Fund":"Farmers, FPOs and agri-entrepreneurs for post-harvest and community farming assets. 3% interest subvention on loans up to ₹2 crore for up to 7 years.","PM Matsya Sampada Yojana (Fisheries)":"Fishers, fish farmers and fisheries entrepreneurs. Subsidy on project cost, generally 40% (60% for SC/ST/women); the rest through a bank loan.","Dairy and Livestock Infrastructure Loans (AHIDF)":"Dairy and livestock units. Interest subvention under the Animal Husbandry Infrastructure Development Fund through banks. The older DEDS name is no longer used; confirm the current scheme with the Department of Animal Husbandry and Dairying.","PMAY-Urban Interest Subsidy":"Urban families with no pucca house. Income bands: EWS up to ₹3 lakh, LIG ₹3–6 lakh, MIG ₹6–9 lakh. Interest subsidy on a home loan; confirm the current subsidy amount.","PMAY-Gramin":"Rural households without a pucca house, selected through the Awaas+ survey and Gram Sabha. Households with any member earning over ₹15,000 a month (₹1.8 lakh a year) are excluded. ₹1.2 lakh assistance in plain areas, plus an optional loan up to ₹70,000.","NSFDC Loans":"SC families with income up to ₹5 lakh (from 7 Jan 2026). Term loan for projects above ₹1.40 lakh, up to ₹45 lakh at 8% for up to 7 years. Micro-finance up to ₹1.25 lakh at 6.5%.","NSTFDC Loans":"ST families through the state channelising agency. Loan size and family income ceiling follow NSTFDC norms; confirm locally.","NBCFDC Loans":"BC/MBC/denotified communities, family income up to ₹3 lakh (NBCFDC site). Loans up to ₹25 lakh: 7% up to ₹1.25 lakh and 8% above that; NBCFDC funds 85%. A 1% timely-payment rebate applies.","NMDFC Loans":"Minority communities. Credit Line 1: family income up to ₹3 lakh, loans up to about ₹20 lakh at about 6%. Credit Line 2: income up to ₹8 lakh, higher limit at a slightly higher rate. Confirm limits and rates with the channelising agency.","DAY-NRLM SHG Bank Linkage":"Women members of SHGs promoted under NRLM. Bank credit linked to the SHG’s grading, with interest concessions as notified.","PM Jan Dhan Overdraft":"Jan Dhan account holders aged 18–65 with satisfactory account operation. Overdraft up to ₹10,000.","PM-KUSUM Solar Pump Loan":"Farmers installing solar pumps. Central and state subsidy; the farmer’s share can be bank-financed. In Tamil Nadu a 70% subsidy / 30% farmer share has been reported.","Pashu Kisan Credit Card (Livestock)":"Livestock, dairy and fisheries farmers. Credit card for working capital; interest subvention applies up to ₹5 lakh and collateral-free up to ₹2 lakh.","SIDBI Mahila Udyam Nidhi":"Women-owned small enterprises. Loan size and rate are set by SIDBI and the partner bank.","TAHDCO Loans":"SC/ST applicants in Tamil Nadu. Subsidy-linked loans for income-generating projects. TAHDCO’s subsidy-linked schemes (such as Vetri Thozhil Munaivor) allow family income up to ₹3 lakh. SC applicants may also use NSFDC loans (₹5 lakh ceiling). Confirm with TAHDCO.","TABCEDCO Individual Loan":"BC/MBC/denotified communities in Tamil Nadu, age 18–60, family income up to ₹3 lakh, one loan per family. Loans up to ₹25 lakh at 7% (up to ₹1.25 lakh) or 8%; repayment 1.5–6 years. Funding: NBCFDC 85%, TABCEDCO 10%, you 5%. Apply online on the TABCEDCO site.","TAMCO Loans":"Minority communities in Tamil Nadu. Term 1: family income up to ₹3 lakh, up to ₹20 lakh at about 6%. Term 2: income up to ₹8 lakh, up to ₹30 lakh at about 8% (men) or 6% (women). Also SHG, education and Virasat loans. Confirm at TAMCO.","Annal Ambedkar Business Champions Scheme (AABCS)":"Tamil Nadu MSME department scheme for SC/ST entrepreneurs: bank loan with capital subsidy and interest support. No family income ceiling. Confirm current limits on msmeonline.tn.gov.in.","NEEDS Entrepreneur Scheme":"First-generation entrepreneurs, Tamil Nadu resident for 3+ years. Project cost ₹10 lakh to ₹5 crore; 25% capital subsidy up to ₹75 lakh plus 3% interest subvention. Age 21–45 (up to 55 for women, SC/ST/BC/MBC, minorities). No income ceiling.","UYEGP Youth Employment Scheme":"Tamil Nadu resident for 3+ years, 8th pass. Age 18–45 (up to 55 for special categories). Family income below ₹5 lakh. Project cost up to ₹15 lakh; 25% subsidy up to ₹3.75 lakh; own contribution 10% (5% for special categories).","TN Co-operative Crop Loan":"Farmers who are members of primary agricultural co-operative societies. Short-term crop loans with interest concessions for timely repayment.","TN Co-operative Jewel Loan":"Gold-pledge loans from co-operative banks. Loan amount depends on the gold value and the society’s policy.","Mathi SHG Loan (TNSRLM)":"Women SHG members under the Tamil Nadu rural livelihood mission. Bank linkage loans sized by the SHG’s grading.","TIIC Industrial Loan":"Term loans for industrial and MSME units from TIIC. Sanction follows project appraisal."};
+const NB=[[["SBI Student Loan","Canara Vidya Turant","Indian Bank Education Loan","Union Bank Education Loan"],"Students with an admission letter. Under the IBA model scheme, loans up to ₹7.5 lakh need no collateral (RBI advises none up to ₹4 lakh); higher loans may need security. Needs a co-borrower. Rate and margin set by the bank."],[["SBI Agri Gold Loan","TN Grama Bank Crop Loan","IOB Kisan Credit Card"],"Farmers with land or tenancy proof. KCC crop loans up to ₹5 lakh get interest subvention (about 4% effective on prompt repayment). Collateral-free up to ₹2 lakh."],[["Indian Bank Agri Term Loan"],"Farmers buying equipment or improving land. Term loan with NABARD refinance; limit and margin set by the bank."],[["SBI MSME Loan","Indian Bank MSME Loan","Canara Bank MSME Loan","Bank of Baroda MSME Loan","KVB Business Loan"],"Running or new micro and small businesses with Udyam registration. Collateral-free cover may be available through CGTMSE. Loan size, rate and margin set by the bank."],[["SBI Home Loan","Canara Home Loan","Indian Bank Home Loan","IOB Home Loan"],"Salaried or self-employed, age 21–65. Loan based on income and property value. PMAY-Urban subsidy may apply if you qualify."],[["SBI Stree Shakti","Bank of Baroda Mahila Shakti"],"Women entrepreneurs (usually a majority ownership of the business). Concessions on rate or margin as per the bank’s package."],[["SBI Xpress Credit Personal Loan"],"Salaried employees, age 21–58. Loan size is based on your salary. SBI requires a minimum credit score of 650 for government/defence salary accounts and 670 for corporate salary accounts."],[["Canara Personal Loan"],"Salaried employees, age 21–60. Loan size is based on your salary."],[["SBI Gold Loan"],"Anyone aged 18+ with gold ornaments. Loan depends on the gold value and the bank’s lending ratio."],[["SBI Pension Loan"],"Pensioners receiving a pension through the bank. Loan size depends on pension amount and age."],[["Canara Artisan Credit Card","Indian Bank Artisan Credit Card"],"Artisans and weavers holding an artisan ID card. Working capital credit limit set by the bank."]];
+
+const INC={
+"PMAY-Urban Interest Subsidy":["Annual household income: EWS up to ₹3 lakh, LIG ₹3–6 lakh, MIG ₹6–9 lakh","ஆண்டு குடும்ப வருமானம்: EWS ₹3 லட்சம் வரை, LIG ₹3–6 லட்சம், MIG ₹6–9 லட்சம்"],
+"PMAY-Gramin":["Excluded if any household member earns over ₹15,000 a month (₹1.8 lakh a year)","குடும்பத்தில் யாராவது மாதம் ₹15,000-க்கு மேல் சம்பாதித்தால் தகுதி இல்லை (ஆண்டுக்கு ₹1.8 லட்சம்)"],
+"PM-Vidyalaxmi Education Loan":["No income limit for the loan. Full interest paid by govt during moratorium: income up to ₹4.5 lakh. 3% interest subvention: income up to ₹8 lakh","கடனுக்கு வருமான வரம்பு இல்லை. தடைக்காலத்தில் முழு வட்டியை அரசு செலுத்தும்: வருமானம் ₹4.5 லட்சம் வரை. 3% வட்டி மானியம்: ₹8 லட்சம் வரை"],
+"NSFDC Loans":["₹5 lakh from 7 Jan 2026 (earlier ₹3 lakh). Skill training has no income limit","7 ஜன. 2026 முதல் ₹5 லட்சம் (முன்பு ₹3 லட்சம்). திறன் பயிற்சிக்கு வருமான வரம்பு இல்லை"],
+"NMDFC Loans":["Credit Line 1: up to ₹3 lakh. Credit Line 2: up to ₹8 lakh","கடன் வரி 1: ₹3 லட்சம் வரை. கடன் வரி 2: ₹8 லட்சம் வரை"],
+"TAMCO Loans":["Term 1: up to ₹3 lakh. Term 2: up to ₹8 lakh","பிரிவு 1: ₹3 லட்சம் வரை. பிரிவு 2: ₹8 லட்சம் வரை"],
+"NMDFC Education Loan":["Credit Line 1: up to ₹3 lakh. Credit Line 2: up to ₹8 lakh","கடன் வரி 1: ₹3 லட்சம் வரை. கடன் வரி 2: ₹8 லட்சம் வரை"],
+"TAHDCO Loans":["₹3 lakh for TAHDCO subsidy schemes. SC education loans ₹5 lakh, ST ₹3 lakh","TAHDCO மானியத் திட்டங்களுக்கு ₹3 லட்சம். SC கல்விக் கடன் ₹5 லட்சம், ST ₹3 லட்சம்"],
+"NSTFDC Loans":["Family income up to ₹3 lakh (NSTFDC guidelines)","குடும்ப வருமானம் ₹3 லட்சம் வரை (NSTFDC வழிகாட்டுதல்)"]
+};
+const BEN={
+"PM Mudra Yojana (Shishu/Kishor/Tarun)":["No collateral: up to ₹20 lakh","Shishu ₹50,000 · Kishor ₹5 lakh · Tarun ₹10 lakh","Free RuPay Mudra card"],
+"PMEGP Subsidised Business Loan":["Subsidy 15–35% of project cost","Project cost up to ₹50 lakh (manufacturing) / ₹20 lakh (service)","Own share only 5–10%"],
+"Stand-Up India":["Loan ₹10 lakh to ₹1 crore","One loan for machinery and working capital","Up to 75% of project cost"],
+"PM FME Micro Food Processing Loan":["35% capital subsidy (capped per unit)","Own share as low as 10%","Training and branding support"],
+"PM SVANidhi":["Collateral-free ₹15,000, then ₹25,000, then ₹50,000","7% interest subsidy","Digital-payment cashback up to ₹1,200 a year"],
+"PM Vishwakarma":["Collateral-free ₹1 lakh, then ₹2 lakh at 5%","Free training with ₹500 daily stipend","₹15,000 toolkit voucher"],
+"CGTMSE Collateral-free Credit Guarantee":["No collateral or third-party guarantee","About 75–85% of loan guaranteed","Ask bank for current ceiling and fee"],
+"Udyami Mitra MSME Loans":["One portal for several banks","Paperless application, tracking","Can link to CGTMSE cover"],
+"PM-Vidyalaxmi Education Loan":["Govt pays full interest during course + 1 year (income up to ₹4.5 lakh)","3% interest subvention (income up to ₹8 lakh, loan up to ₹10 lakh)","No collateral or guarantor up to ₹10 lakh","75% govt guarantee up to ₹7.5 lakh"],
+"Central Sector Interest Subsidy (Education)":["Govt pays full interest during course + 1 year","Income up to ₹4.5 lakh","Loan up to ₹10 lakh, technical/professional courses"],
+"NBCFDC Education Loan":["Up to ₹25 lakh at about 8%","Repay up to 10 years (5-year moratorium)","Apply via TABCEDCO in Tamil Nadu"],
+"NSFDC Education Loan":["Up to ₹40 lakh or 90% of fee","About 6.5% interest","Apply via TAHDCO in Tamil Nadu"],
+"NMDFC Education Loan":["Up to ₹20 lakh (India), ₹30 lakh (abroad)","About 3% (income up to ₹3 lakh) or 5% (₹3–8 lakh)","Professional and technical courses"],
+"Kisan Credit Card":["Crop loans up to ₹5 lakh: 7%, effectively 4% if repaid on time","No collateral up to ₹2 lakh","Draw and repay as needed"],
+"Agriculture Infrastructure Fund":["3% interest subvention, loans up to ₹2 crore","Up to 7 years","Moratorium 6 months to 2 years"],
+"PM Matsya Sampada Yojana (Fisheries)":["Subsidy generally 40% (60% for SC/ST/women)","Ponds, hatcheries, boats, cold storage","Balance via bank loan"],
+"Dairy and Livestock Infrastructure Loans (AHIDF)":["3% interest subvention","Loan up to about 90% of project cost","Initial moratorium"],
+"PMAY-Urban Interest Subsidy":["Interest subsidy on home loan, lowers EMI","Up to about ₹1.8 lakh (confirm current)","Credited to loan account"],
+"PMAY-Gramin":["₹1.2 lakh to build a pucca house","Optional loan up to ₹70,000","MGNREGS wages (90 days) + ₹12,000 toilet"],
+"PM Surya Ghar Rooftop Solar Loan":["Subsidy ₹30,000/kW (first 2 kW), ₹18,000 (3rd kW), max ₹78,000","Low-interest loan, collateral-free for small systems","Up to 300 free units a month"],
+"NSFDC Loans":["Term loan up to ₹45 lakh at 8%, 7 years","Micro-finance up to ₹1.25 lakh at 6.5%","Free skill training"],
+"NSTFDC Loans":["Concessional-interest project loans","Schemes for tribal women and artisans","Apply via state agency"],
+"NBCFDC Loans":["Up to ₹25 lakh: 7% to ₹1.25 lakh, 8% above","NBCFDC funds 85%","1% rebate for timely payment"],
+"NMDFC Loans":["Line 1: up to about ₹20 lakh at about 6%","Line 2: higher limit, slightly higher rate","Micro-finance and education loans"],
+"Virasat Loan for Minority Artisans (NMDFC/TAMCO)":["Up to about ₹10 lakh, concessional rate","For raw material, tools, working capital"],
+"DAY-NRLM SHG Bank Linkage":["Bank loans sized by SHG grading","Interest concession; no collateral up to ₹20 lakh","Revolving fund for new SHGs"],
+"PM Jan Dhan Overdraft":["Overdraft up to ₹10,000","Zero-balance account, free RuPay card, accident cover","Interest only on amount used"],
+"PM-KUSUM Solar Pump Loan":["Central + state subsidy (about 70% reported in TN)","Your share can be bank-financed","Free daytime pumping power"],
+"Pashu Kisan Credit Card (Livestock)":["Working capital for feed and medicine","Interest subvention up to ₹5 lakh","No collateral up to ₹2 lakh"],
+"SIDBI Mahila Udyam Nidhi":["Term loan for women-owned enterprises","Via SIDBI partner banks","Ask bank for rate and limit"],
+"TAHDCO Loans":["Subsidy reduces the loan you repay","For SC/ST income-generating projects","SC can also use NSFDC loans (₹5 lakh ceiling)"],
+"TABCEDCO Individual Loan":["Up to ₹25 lakh: 7% to ₹1.25 lakh, 8% above","Own share only 5%","Repay 1.5–6 years; apply online"],
+"TABCEDCO Milch Animal Loan (Aavin)":["Concessional loan to buy milch animals","Sell milk via Aavin society"],
+"TAMCO Loans":["Term 1: up to ₹20 lakh at about 6%","Term 2: up to ₹30 lakh at about 8% (women 6%)","SHG, education, Virasat loans too"],
+"Annal Ambedkar Business Champions Scheme (AABCS)":["Capital subsidy (35% reported, capped)","Interest support on bank loan","No family income ceiling"],
+"NEEDS Entrepreneur Scheme":["25% capital subsidy up to ₹75 lakh","3% interest subvention","Projects ₹10 lakh to ₹5 crore, with training"],
+"UYEGP Youth Employment Scheme":["25% subsidy up to ₹3.75 lakh","Project cost up to ₹15 lakh","Own share 5–10%; free training"],
+"TN Co-operative Crop Loan":["Interest concession for timely repayment","Zero-interest up to a limit (confirm with society)","Repay after harvest"],
+"TN Co-operative Jewel Loan":["Quick gold-pledge loan, little paperwork","Co-operative bank rates","Amount depends on gold value"],
+"Mathi SHG Loan (TNSRLM)":["Bank loans sized by SHG grading","Interest concession for prompt repayment","Revolving and community fund support"],
+"TIIC Industrial Loan":["Term loan for land, building, machinery","Project appraisal support","Can combine with NEEDS"]
+};
+const BG=[
+[["SBI Student Loan","Canara Vidya Turant","Indian Bank Education Loan","Union Bank Education Loan"],["No collateral up to ₹7.5 lakh (IBA model)","Covers tuition, hostel, books, laptop","No EMI during course + 6–12 months","Tax deduction on interest (Sec 80E, old regime)"]],
+[["SBI Agri Gold Loan","TN Grama Bank Crop Loan","IOB Kisan Credit Card"],["Crop loans up to ₹5 lakh: about 4% effective if repaid on time","No collateral up to ₹2 lakh","Repay after harvest"]],
+[["Indian Bank Agri Term Loan"],["Term loan for tractors, pumps, land","NABARD refinance","Long repayment to suit farm income"]],
+[["SBI MSME Loan","Indian Bank MSME Loan","Canara Bank MSME Loan","Bank of Baroda MSME Loan","KVB Business Loan"],["Term loan and working capital","No-collateral option via CGTMSE","Priority-sector benefits with Udyam"]],
+[["SBI Home Loan","Canara Home Loan","Indian Bank Home Loan","IOB Home Loan"],["Repay up to about 30 years, lower EMI","PMAY-Urban subsidy if eligible","Tax deduction: Sec 24b and 80C (old regime)"]],
+[["SBI Stree Shakti"],["Interest concession for women","Lower margin money","Majority women-owned businesses"]],
+[["Bank of Baroda Mahila Shakti"],["Interest concession for women","Lower margin money","CGTMSE no-collateral option"]],
+[["SBI Xpress Credit Personal Loan"],["No collateral or guarantor","Quick for salary-account holders","Repay over several years"]],
+[["Canara Personal Loan"],["Unsecured loan","Size linked to salary","Flexible repayment"]],
+[["SBI Gold Loan"],["Quick loan against gold, little paperwork","Cheaper than unsecured loans","Flexible repayment"]],
+[["SBI Pension Loan"],["No collateral","EMI deducted from pension","Size depends on pension and age"]],
+[["Canara Artisan Credit Card","Indian Bank Artisan Credit Card"],["Card-based working-capital limit","Interest only on amount used","For artisans with ID card"]]
+];
+function ben(l){return BEN[l.n]||(BG.find(x=>x[0].includes(l.n))||[0,[]])[1]}
+function nt(l){return NT[l.n]||(NB.find(x=>x[0].includes(l.n))||[0,""])[1]}
+function sch(l){const e=SCH.find(x=>x[0].includes(l.n));return e?[e[1],e[2]]:[l.n,l.lv==="C"?"nat":"sta"]}
+let lim=8,lang="en",step=1,prev=1,tab="all",err="",p={cr:"",age:"",inc:"",g:"",c:"",o:""},cats=new Set();
+const t=k=>TX[lang][k],nm=o=>o[lang==="en"?0:1];
+function ok(l){const r=l.r,a=+p.age,i=+p.inc;
+ if(r.cs&&p.cr==="L")return 0;
+ if(r.o&&!r.o.split(",").includes(p.o))return 0;
+ if(r.c&&!r.c.split(",").includes(p.c)&&!(r.w&&p.g==="F"))return 0;
+ if(r.g==="F"&&p.g!=="F")return 0;
+ {let cap=+r.i;if(r.ix){const [cc,vv]=r.ix.split("=");if(p.c===cc)cap=+vv}if(r.i&&i>cap)return 0}
+ if(r.a){const [lo,hi]=r.a.split("-"),sp=p.g==="F"||["BC","MBC","SC","ST","M"].includes(p.c),mx=r.s&&sp?+r.s:+hi;if(a<+lo||(mx&&a>mx))return 0}
+ return 1}
+function crit(l){const r=l.r,x=[];
+ if(r.o)x.push(r.o.split(",").map(k=>nm(OCC[k])).join(" / "));
+ if(r.c)x.push(r.c.split(",").map(k=>nm(COM[k])).join(" / ")+(r.w?" + "+nm(GEN.F):""));
+ else if(r.g)x.push(nm(GEN.F));
+ if(r.a){const [lo,hi]=r.a.split("-");x.push(t("age2")+" "+lo+(hi?"–"+hi:"+"))}
+ if(r.i)x.push(t("inc2")+r.i+t("lakh"));
+ return x.join(" · ")}
+function chips(key,obj,multi){return `<div class="chips">`+Object.keys(obj).map(k=>`<button class="chip${(multi?cats.has(k):p[key]===k)?" on":""}" aria-pressed="${!!(multi?cats.has(k):p[key]===k)}" data-k="${key}" data-v="${k}">${nm(obj[k])}</button>`).join("")+`</div>`}
+const CR={H:["700 or above","700 அல்லது அதற்கு மேல்"],M:["650–699","650–699"],L:["Below 650","650-க்குக் கீழ்"],U:["Not sure / new to credit","தெரியாது / புதியவர்"]};const BV={};
+const OWN={C:"",S:"",B:""};
+const SAMPLES=[{k:"farmer",n:["Farmer","விவசாயி"],p:{cr:"U",age:"45",inc:"1.5",g:"M",c:"G",o:"F"},cats:["agr"]},{k:"vendor",n:["Street vendor","தெருவோர வியாபாரி"],p:{cr:"U",age:"32",inc:"1.2",g:"M",c:"G",o:"V"},cats:["biz"]},{k:"student",n:["BC student","BC மாணவர்"],p:{cr:"U",age:"19",inc:"2",g:"M",c:"BC",o:"S"},cats:["edu"]}];
+const E={p:"500000",r:"10",n:"5",u:"y"};
+const fmt=x=>"₹"+Math.round(x).toLocaleString("en-IN");
+const NOW=new Date();
+function vInfo(l){if(l.v==="pending")return{pend:1};const ex=l.v.length>7,d=new Date(ex?l.v:l.v+"-01"),nx=new Date(d);nx.setMonth(nx.getMonth()+3);return{d,nx,ex,st:(NOW-d)/864e5>183}}
+function fd(d,ex){return d.toLocaleDateString(lang==="en"?"en-IN":"ta-IN",ex?{day:"numeric",month:"short",year:"numeric"}:{month:"short",year:"numeric"})}
+function matches(){return R.filter(l=>cats.has(l.c)&&ok(l))}
+function emiOut(){const P=+E.p,r=+E.r,n=E.u==="y"?+E.n*12:+E.n;
+ if(!(P>0)||!(n>0)||!(r>=0)||E.r==="")return`<div class="err">${t("err3")}</div>`;
+ const i=r/1200,m=i?P*i*Math.pow(1+i,n)/(Math.pow(1+i,n)-1):P/n,tot=m*n;
+ return`<div class="res"><div class="cr">${t("mEmi")}</div><div class="big">${fmt(m)}</div><div class="cr">${t("tInt")}: <b>${fmt(tot-P)}</b> · ${t("tPay")}: <b>${fmt(tot)}</b></div></div><p class="cr">${t("emiNote")}</p>`}
+function emiForm(){return`<label>${t("loanAmt")}<input data-e="p" type="number" inputmode="numeric" min="0" value="${E.p}"></label><label>${t("rate")}<input data-e="r" type="number" inputmode="decimal" min="0" step="0.1" value="${E.r}"></label><label>${t("ten")}<div class="row"><input data-e="n" type="number" inputmode="numeric" min="1" value="${E.n}"><button class="chip${E.u==="y"?" on":""}" aria-pressed="${E.u==="y"}" data-u="y">${t("yrs")}</button><button class="chip${E.u==="m"?" on":""}" aria-pressed="${E.u==="m"}" data-u="m">${t("mos")}</button></div></label><div id="eo">${emiOut()}</div>`}
+function cardHTML(l){const v=vInfo(l),own=OWN[l.lv],r=l.r,bv=BV[l.n];
+ const vh=v.pend?`<p class="cr warn">⚠ ${t("pend")}</p>`:`<p class="cr">${t("ver")}: <b>${fd(v.d,v.ex)}</b> · ${t("nxt")}: ${fd(v.nx,v.ex)}${own?` · ${t("by")}: ${own}`:""}</p>${v.st?`<p class="cr warn">⚠ ${t("stale")}</p>`:""}`;
+ const cw=r.cs&&(p.cr==="U"||p.cr==="M")?`<div class="cr warn">⚠ ${t("crW").replace("{n}",r.cs)}</div>`:"";
+ const bs=bv?`<p class="cr">${t("bver")}: <b>${bv}</b></p>`:`<p class="cr warn">⚠ ${t("bunv")}</p>`;
+ return`<div class="card"><details><summary><div class="nm"><span class="tag L-${l.lv}">${nm(LV[l.lv])}</span><span class="cr">${nm(CAT[l.c])}</span></div><b>${l.n}</b><div class="sc">${sch(l)[0]} · <i>${t(sch(l)[1])}</i></div><div class="cr lc">★ ${ben(l)[0]}</div>${cw}</summary><h2>${t("ben")}</h2>${lang==="ta"?`<p class="cr">${t("benEn")}</p>`:""}<ul>${ben(l).map(b=>`<li>${b}</li>`).join("")}</ul>${bs}<details class="more"><summary class="cr">${t("elig")} · ${t("docs")}</summary><h2>${t("elig")}</h2>${eligRows(l)}<p class="cr">${nt(l)}</p>${vh}<h2>${t("docs")}</h2><ul>${l.d.map(d=>`<li>${nm(D[d])}</li>`).join("")}</ul></details><a class="go" href="https://${l.s}" target="_blank" rel="noopener">${t("apply")} ↗</a><div class="pair"><button class="btn alt sm" data-pdf="${l.i}">${t("pdf")}</button><button class="btn alt sm" data-cp="${l.i}">${t("cp")}</button></div></details></div>`}
+function listText(list){return t("chkT")+"\n"+list.map(l=>"\n"+l.n+" ("+nm(LV[l.lv])+")\n"+l.d.map(d=>"☐ "+nm(D[d])).join("\n")+"\n"+t("src")+": https://"+l.s).join("\n")}
+async function copyList(list,btn){const x=listText(list);try{if(navigator.share)await navigator.share({title:t("chkT"),text:x});else{await navigator.clipboard.writeText(x);btn.textContent=t("copied")}}catch(e){}}
+function printList(list){const docs=[...new Set(list.flatMap(l=>l.d))],dt=NOW.toLocaleDateString(lang==="en"?"en-IN":"ta-IN",{day:"numeric",month:"short",year:"numeric"});
+ pv.innerHTML=`<h1>Loan Finder · ${t("chkT")}</h1><p>${t("date")}: ${dt}</p>`+(list.length>1?`<h2>${t("allDocs")}</h2><ul class="ck">${docs.map(d=>`<li>☐ ${nm(D[d])}</li>`).join("")}</ul>`:"")+list.map(l=>`<h3>${l.n} (${nm(LV[l.lv])})</h3><ul class="ck">${l.d.map(d=>`<li>☐ ${nm(D[d])}</li>`).join("")}</ul><p>${t("src")}: https://${l.s}</p>`).join("")+`<p class="note">${t("disc")}</p>`;
+ print()}
+
+function eligRows(l){const r=l.r,row=(k,v)=>`<div class="er"><span>${t(k)}</span><b>${v}</b></div>`,x=[];
+ const cm=r.c?r.c.split(",").map(k=>nm(COM[k])).join(t("eOr"))+(r.w?t("eOr")+t("eWm"):""):"";
+ x.push(row("eCat",r.c?cm:(r.g==="F"?t("eW"):t("eAny"))));
+ x.push(row("eInc",r.i?fmt(+r.i*100000)+(r.ix?" ("+r.ix.split("=")[0]+": "+fmt(+r.ix.split("=")[1]*100000)+")":""):t("iNo")));
+ if(INC[l.n])x.push(`<div class="er"><span>${t("eInD")}</span><b>${INC[l.n][lang==="en"?0:1]}</b></div>`);
+ if(r.cs)x.push(row("eCr",t("crMin").replace("{n}",r.cs)));
+ if(r.a){const [lo,hi]=r.a.split("-");x.push(row("eAge",lo+(hi?"–"+hi:"+")+(r.s?" ("+(+r.s)+" "+t("eSp")+")":"")))}
+ if(r.o)x.push(row("eOcc",r.o.split(",").map(k=>nm(OCC[k])).join(" / ")));
+ if(r.g==="F"&&r.c)x.push(row("eGen",t("eW")));
+ return x.join("")}
+function view(){
+ const sn=step==="e"?prev:step;
+ const h=`<header><h1>Loan Finder<small>கடன் வழிகாட்டி · ${t("sub")}</small></h1><div class="hb"><button class="lang" id="em">EMI</button><button class="lang" id="lg">${lang==="en"?"தமிழ்":"English"}</button></div></header><p class="cr">${t("ds")}</p><div class="steps">${[1,2,3].map(i=>`<i class="${i<=sn?"on":""}"></i>`).join("")}</div>`;
+ let b="";
+ if(step==="e")b=`<div class="card"><h2 style="margin-top:0">${t("emi")}</h2>${emiForm()}</div><button class="btn alt" id="eb">${t("back")}</button>`;
+ if(step===1)b=`<div class="card"><h2 style="margin-top:0">${t("sam")}</h2><div class="chips">${SAMPLES.map(s=>`<button class="chip" data-s="${s.k}">${nm(s.n)}</button>`).join("")}</div></div><div class="card"><h2 style="margin-top:0">${t("s1")}</h2>
+ <label>${t("age")}<input id="age" type="number" inputmode="numeric" min="1" max="100" value="${p.age}"></label>
+ <h2>${t("gen")}</h2>${chips("g",GEN)}<h2>${t("com")}</h2>${chips("c",COM)}<h2>${t("occ")}</h2>${chips("o",OCC)}<h2>${t("crt")}</h2>${chips("cr",CR)}
+ <h2><label for="inc">${t("inc")}</label></h2><input id="inc" type="number" inputmode="decimal" min="0" step="0.1" value="${p.inc}">
+ ${err?`<div class="err">${err}</div>`:""}<button class="btn" id="nx">${t("next")}</button></div>`;
+ if(step===2)b=`<div class="card"><h2 style="margin-top:0">${t("s2")}</h2><p class="cr">${t("pick")}</p>${chips("cat",CAT,1)}${err?`<div class="err">${err}</div>`:""}<button class="btn" id="go">${t("find")}</button><button class="btn alt" id="bk">${t("back")}</button></div>`;
+ if(step===3){const m=matches(),sh=m.filter(l=>tab==="all"||l.lv===tab),vis=sh.slice(0,lim);
+  const grp=k=>{const g=vis.filter(l=>l.lv===k);return g.length?`<h2>${nm(LV[k])} (${sh.filter(l=>l.lv===k).length})</h2>`+g.map(cardHTML).join(""):""};
+  b=`<h2>${t("s3")}: ${m.length} ${t("found")}</h2>`+`<div class="tabs">`+["all","C","S","B"].map(k=>`<button class="chip${tab===k?" on":""}" aria-pressed="${tab===k}" data-tab="${k}">${k==="all"?t("all"):nm(LV[k])} (${k==="all"?m.length:m.filter(l=>l.lv===k).length})</button>`).join("")+`</div>`+
+  (sh.length?["C","S","B"].map(grp).join(""):`<div class="card">${t("none")}</div>`)+
+  (sh.length>lim?`<button class="btn alt" id="sm">${t("showMore").replace("{n}",sh.length-lim)}</button>`:"")+
+  (m.length?`<button class="btn" data-pdf="all">${t("pdfAll")}</button><button class="btn alt" data-cp="all">${t("cp")}</button><details class="card"><summary><b>${t("emi")}</b></summary>${emiForm()}</details>`:"")+
+  `<div class="pair"><button class="btn alt" id="bk">${t("back")}</button><button class="btn alt" id="rs">${t("redo")}</button></div>`}
+ app.innerHTML=h+b+`<p class="note">🔒 ${t("priv")}<br>${t("disc")}</p>`;
+ lg.onclick=()=>{lang=lang==="en"?"ta":"en";err="";sync();view()};
+ document.documentElement.lang=lang==="en"?"en":"ta";
+ const q=id=>document.getElementById(id);
+ q("em").onclick=()=>{sync();if(step!=="e"){prev=step;step="e"}view();scrollTo(0,0)};
+ if(q("eb"))q("eb").onclick=()=>{step=prev;view();scrollTo(0,0)};
+ app.querySelectorAll("[data-e]").forEach(e=>e.oninput=()=>{E[e.dataset.e]=e.value;q("eo").innerHTML=emiOut()});
+ app.querySelectorAll("[data-u]").forEach(e=>e.onclick=()=>{E.u=e.dataset.u;view()});
+ app.querySelectorAll("[data-pdf]").forEach(e=>e.onclick=()=>{const x=e.dataset.pdf;printList(x==="all"?matches():[R[+x]])});
+ app.querySelectorAll("[data-s]").forEach(e=>e.onclick=()=>{const s=SAMPLES.find(x=>x.k===e.dataset.s);p={...s.p};cats=new Set(s.cats);err="";tab="all";lim=8;step=3;view();scrollTo(0,0)});
+ app.querySelectorAll("[data-k]").forEach(e=>e.onclick=()=>{const k=e.dataset.k,v=e.dataset.v;if(k==="cat")cats.has(v)?cats.delete(v):cats.add(v);else p[k]=v;err="";sync();view()});
+ app.querySelectorAll(".card>details").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)app.querySelectorAll(".card>details[open]").forEach(o=>{if(o!==d&&!o.querySelector("[data-e]"))o.open=false})}));
+ app.querySelectorAll("[data-cp]").forEach(e=>e.onclick=()=>{const x=e.dataset.cp;copyList(x==="all"?matches():[R[+x]],e)});
+ if(q("sm"))q("sm").onclick=()=>{const y=scrollY;lim+=8;view();scrollTo(0,y)};
+ app.querySelectorAll("[data-tab]").forEach(e=>e.onclick=()=>{tab=e.dataset.tab;lim=8;view()});
+ if(q("nx"))q("nx").onclick=()=>{sync();if(!p.age||!p.inc||!p.g||!p.c||!p.o||!p.cr||+p.age<1){err=t("e1");view();return}err="";step=2;view();scrollTo(0,0)};
+ if(q("go"))q("go").onclick=()=>{if(!cats.size){err=t("e2");view();return}err="";tab="all";lim=8;step=3;view();scrollTo(0,0)};
+ if(q("bk"))q("bk").onclick=()=>{step--;err="";view();scrollTo(0,0)};
+ if(q("rs"))q("rs").onclick=()=>{p={cr:"",age:"",inc:"",g:"",c:"",o:""};cats=new Set();step=1;view();scrollTo(0,0)}}
+function sync(){const a=document.getElementById("age"),i=document.getElementById("inc");if(a)p.age=a.value;if(i)p.inc=i.value}
+view();
+addEventListener("scroll",()=>{tp.style.display=scrollY>700?"block":"none"},{passive:true});tp.onclick=()=>scrollTo({top:0,behavior:"smooth"});
+</script></body></html>
