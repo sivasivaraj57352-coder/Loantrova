@@ -15,7 +15,6 @@ Many students, backward class families and workers don’t know about government
 
 ## Features
 - Eligibility check by age, gender, community, occupation, income and credit score
-- 66 loan entries: 30 Central, 11 Tamil Nadu, 25 bank
 - English and Tamil
 - Eligibility, benefits, documents and official website for each loan
 - EMI calculator
